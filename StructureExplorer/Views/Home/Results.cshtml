@@ -1,0 +1,84 @@
+﻿@model JsonAnalysisResult
+
+<div class="container-fluid mt-5">
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5>Objects</h5>
+                    
+                    <h2>
+                        @Model.ObjectCount
+                    </h2>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5>Arrays</h5>
+                    
+                    <h2>
+                        @Model.ArrayCount
+                    </h2>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5>Values</h5>
+                    
+                    <h2>
+                        @Model.PrimitiveCount
+                    </h2>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5>Depth</h5>
+                    
+                    <h2>
+                        @Model.MaxDepth
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card shadow">
+        <div class="card-header bg-dark text-white">
+            JSON Structure
+        </div>
+        
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>ValueType</th>
+                        <th>Path</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    @foreach (JsonNodeInfo node in Model.Nodes)
+                    {
+                        <tr>
+                            <td>@node.Name</td>
+                            <td>@node.NodeType</td>
+                            <td>@node.ValueType</td>
+                            <td class="font-monospace">@node.Path</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

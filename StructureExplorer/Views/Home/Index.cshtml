@@ -1,0 +1,50 @@
+﻿@model StructureExplorer.ViewModels.AnalyzeViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container-fluid mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">JSON Explorer</h3>
+                </div>
+                
+                <div class="card-body">
+                    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+                    
+                    <form asp-action="Index" method="post">
+                        <div class="mb-4">
+                            <label asp-for="JsonUrl" class="form-label fw-bold"></label>
+                            <input asp-for="JsonUrl" class="form-control" placeholder="https://example.com/data.json" />
+                            
+                            <div class="form-text">
+                                Enter a URL That Returns JSON
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mb-4">
+                            <span class="badge bg-secondary">
+                                OR
+                            </span>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label asp-for="JsonText" class="form-label fw-bold"></label>
+                            <textarea asp-for="JsonText" class="form-control font-monospace" rows="15" placeholder="Paste JSON Here..."></textarea>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">Analyze JSON</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
