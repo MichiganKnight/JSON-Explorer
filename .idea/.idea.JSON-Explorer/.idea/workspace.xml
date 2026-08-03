@@ -15,8 +15,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0e287225-4b66-49e6-aa5e-b2418d8542b9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JSON-Explorer.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StructureExplorer/Models/JsonAnalysisResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StructureExplorer/Models/JsonAnalysisResult.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StructureExplorer/Models/JsonNodeInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StructureExplorer/Models/JsonNodeInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StructureExplorer/Services/JsonAnalyzerService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StructureExplorer/Services/JsonAnalyzerService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StructureExplorer/Views/Home/Results.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/StructureExplorer/Views/Home/Results.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StructureExplorer/wwwroot/css/site.css" beforeDir="false" afterPath="$PROJECT_DIR$/StructureExplorer/wwwroot/css/site.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StructureExplorer/wwwroot/js/site.js" beforeDir="false" afterPath="$PROJECT_DIR$/StructureExplorer/wwwroot/js/site.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +45,7 @@
     <setting file="file://$PROJECT_DIR$/StructureExplorer/Services/JsonAnalyzerService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/StructureExplorer/Services/JsonFetcherService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/StructureExplorer/Views/Home/Results.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/StructureExplorer/Views/Shared/_JsonNode.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
@@ -64,6 +69,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
@@ -121,7 +127,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1785785711427</updated>
-      <workItem from="1785785712525" duration="2849000" />
+      <workItem from="1785785712525" duration="3753000" />
     </task>
     <servers />
   </component>

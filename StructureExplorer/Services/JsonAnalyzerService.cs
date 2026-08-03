@@ -16,31 +16,35 @@ namespace StructureExplorer.Services
                 return result;
             }
 
-            Traverse(root, result, "$", "$", 0);
+            JsonNodeInfo rootNode = Traverse(root, result, "$", "$", 0);
+            
+            result.RootNodes.Add(rootNode);
             
             return result;
         }
 
-        private void Traverse(JsonNode node, JsonAnalysisResult result, String name, string path, int depth)
+        private static JsonNodeInfo Traverse(JsonNode node, JsonAnalysisResult result, string name, string path, int depth)
         {
             result.MaxDepth = Math.Max(result.MaxDepth, depth);
+
+            JsonNodeInfo info;
 
             switch (node)
             {
                 case JsonObject obj:
                     result.ObjectCount++;
                     
-                    result.Nodes.Add(new JsonNodeInfo
+                    info = new JsonNodeInfo
                     {
                         Name = name,
                         Path = path,
                         NodeType = "Object",
                         Depth = depth
-                    });
+                    };
 
                     foreach (KeyValuePair<string, JsonNode?> property in obj)
                     {
-                        Traverse(property.Value!, result, property.Key, $"{path}.{property.Key}", depth + 1);
+                        info.Children.Add(Traverse(property.Value!, result, property.Key, $"{path}.{property.Key}", depth + 1));
                     }
                     
                     break;
@@ -48,19 +52,19 @@ namespace StructureExplorer.Services
                 case JsonArray array:
                     result.ArrayCount++;
                     
-                    result.Nodes.Add(new JsonNodeInfo
+                    info = new JsonNodeInfo
                     {
                         Name = name,
                         Path = path,
                         NodeType = "Array",
                         Depth = depth
-                    });
+                    };
 
                     int index = 0;
 
                     foreach (JsonNode item in array)
                     {
-                        Traverse(item!, result, $"[{index}]", $"{path}[{index}]", depth + 1);
+                        info.Children.Add(Traverse(item!, result, $"[{index}]", $"{path}[{index}]", depth + 1));
                         
                         index++;
                     }
@@ -70,17 +74,29 @@ namespace StructureExplorer.Services
                 case JsonValue value:
                     result.PrimitiveCount++;
                     
-                    result.Nodes.Add(new JsonNodeInfo
+                    info = new JsonNodeInfo
                     {
                         Name = name,
                         Path = path,
                         NodeType = "Value",
                         ValueType = value.GetValueKind().ToString(),
                         Depth = depth
-                    });
+                    };
+                    
+                    break;
+                
+                default:
+                    info = new JsonNodeInfo
+                    {
+                        Name = name,
+                        Path = path,
+                        NodeType = "Unknown",
+                    };
                     
                     break;
             }
+
+            return info;
         }
     }
 }

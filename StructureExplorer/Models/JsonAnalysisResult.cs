@@ -2,7 +2,7 @@
 {
     public class JsonAnalysisResult
     {
-        public List<JsonNodeInfo> Nodes { get; set; } = [];
+        public List<JsonNodeInfo> RootNodes { get; set; } = [];
         
         public int ObjectCount { get; set; }
         public int ArrayCount { get; set; }

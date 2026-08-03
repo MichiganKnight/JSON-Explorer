@@ -1,0 +1,47 @@
+﻿@model JsonNodeInfo
+
+<li>
+    @switch (Model.NodeType)
+    {
+        case "Object":
+            <strong>
+                ▼ @Model.Name
+            </strong>
+        
+            <span class="badge bg-primary">
+                Object
+            </span>
+            
+            break;
+        case "Array":
+            <strong>
+                ▼ @Model.Name
+            </strong>
+        
+            <span class="badge bg-success">
+                Array
+            </span>
+            
+            break;
+        default:
+            <span>
+                @Model.Name
+            </span>
+        
+            <span class="badge bg-secondary">
+                @Model.NodeType
+            </span>
+            
+            break;
+    }
+
+    @if (Model.Children.Any())
+    {
+        <ul class="mt-2">
+            @foreach (JsonNodeInfo child in Model.Children)
+            {
+                <partial name="_JsonNode" model="child" />
+            }
+        </ul>
+    }
+</li>
