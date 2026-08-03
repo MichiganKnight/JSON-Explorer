@@ -1,13 +1,35 @@
-.json-tree,
-.json-tree ul {
+.json-tree {
     list-style-type: none;
-    padding-left: 20px;
+    padding-left: 0;
 }
 
-.json-tree li {
+.json-tree ul {
+    list-style-type: none;
+    padding-left: 30px;
+}
+
+.json-node {
     margin: 6px 0;
 }
 
-.json-tree strong {
+.json-node button {
+    width: 20px;
+}
+
+.json-node strong {
     font-family: monospace;
+}
+
+.toggle-button {
+    text-decoration: none;
+    width: 25px;
+}
+
+.toggle-button span {
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+
+.toggle-button[aria-expanded="false"] span {
+    transform: rotate(-90deg);
 }

@@ -57,16 +57,27 @@ namespace StructureExplorer.Services
                         Name = name,
                         Path = path,
                         NodeType = "Array",
-                        Depth = depth
+                        Depth = depth,
+                        ChildCount = array.Count
                     };
 
                     int index = 0;
 
-                    foreach (JsonNode item in array)
+                    const int maxArrayItems = 5;
+                    
+                    IEnumerable<JsonNode?> itemsToProcess = array.Take(maxArrayItems);
+
+                    foreach (JsonNode? item in itemsToProcess)
                     {
                         info.Children.Add(Traverse(item!, result, $"[{index}]", $"{path}[{index}]", depth + 1));
                         
                         index++;
+                    }
+
+                    if (array.Count > maxArrayItems)
+                    {
+                        info.HasMoreChildren = true;
+                        info.RemainingChildren = array.Count - maxArrayItems;
                     }
                     
                     break;

@@ -1,47 +1,52 @@
-﻿@model JsonNodeInfo
+﻿@using Microsoft.AspNetCore.Html
+@model JsonNodeInfo
 
-<li>
-    @switch (Model.NodeType)
-    {
-        case "Object":
-            <strong>
-                ▼ @Model.Name
-            </strong>
-        
-            <span class="badge bg-primary">
-                Object
-            </span>
-            
-            break;
-        case "Array":
-            <strong>
-                ▼ @Model.Name
-            </strong>
-        
-            <span class="badge bg-success">
-                Array
-            </span>
-            
-            break;
-        default:
-            <span>
-                @Model.Name
-            </span>
-        
-            <span class="badge bg-secondary">
-                @Model.NodeType
-            </span>
-            
-            break;
-    }
+@{
+    string nodeId = Guid.NewGuid().ToString();
+}
 
+<li class="json-node">
     @if (Model.Children.Any())
     {
-        <ul class="mt-2">
+        <div>
+            <button class="btn btn-sm btn-link p-0 toggle-button" type="button" data-bs-toggle="collapse" data-bs-target="#@nodeId" aria-expanded="True">
+                <span>
+                    ▼
+                </span>
+            </button>
+            
+            @NodeLabel()
+        </div>
+        
+        <ul id="@nodeId" class="collapse show">
             @foreach (JsonNodeInfo child in Model.Children)
             {
                 <partial name="_JsonNode" model="child" />
             }
+            
+            @if (Model.HasMoreChildren)
+            {
+                <li class="text-muted fst-italic">
+                    ... @Model.RemainingChildren More Items
+                </li>
+            }
         </ul>
     }
+    else
+    {
+        @NodeLabel()
+    }
 </li>
+
+@functions {
+
+    private IHtmlContent NodeLabel()
+    {
+        return Model.NodeType switch
+        {
+            "Object" => new HtmlString($"<strong>{Model.Name}</strong> <span class='badge bg-primary'>Object</span>"),
+            "Array" => new HtmlString($"<strong>{Model.Name}</strong> <span class='badge bg-success'>Array ({Model.ChildCount})</span>"),
+            _ => new HtmlString($"{Model.Name} <span class='badge bg-secondary'>{Model.ValueType}</span>"),
+        };
+    }
+}
