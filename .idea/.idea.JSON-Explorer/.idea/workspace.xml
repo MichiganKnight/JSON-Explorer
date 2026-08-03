@@ -15,10 +15,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0e287225-4b66-49e6-aa5e-b2418d8542b9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/StructureExplorer/Models/JsonNodeInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StructureExplorer/Models/JsonNodeInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StructureExplorer/Models/JsonAnalysisResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StructureExplorer/Models/JsonAnalysisResult.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/StructureExplorer/Services/JsonAnalyzerService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StructureExplorer/Services/JsonAnalyzerService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StructureExplorer/Views/Shared/_JsonNode.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/StructureExplorer/Views/Shared/_JsonNode.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StructureExplorer/wwwroot/css/site.css" beforeDir="false" afterPath="$PROJECT_DIR$/StructureExplorer/wwwroot/css/site.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StructureExplorer/Views/Home/Results.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/StructureExplorer/Views/Home/Results.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StructureExplorer/wwwroot/js/results.js" beforeDir="false" afterPath="$PROJECT_DIR$/StructureExplorer/wwwroot/js/results.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,12 +32,20 @@
     <option name="cachedIndexableFilesCount" value="1" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/StructureExplorer/Models/JsonAnalysisResult.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/StructureExplorer/Models/JsonNodeInfo.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/StructureExplorer/Models/SearchResult.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/StructureExplorer/Services/IJsonAnalyzerService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/StructureExplorer/Services/IJsonFetcherService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/StructureExplorer/Services/JsonAnalyzerService.cs" root0="FORCE_HIGHLIGHTING" />
@@ -125,7 +133,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1785785711427</updated>
-      <workItem from="1785785712525" duration="4840000" />
+      <workItem from="1785785712525" duration="5898000" />
     </task>
     <servers />
   </component>

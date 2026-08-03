@@ -106,6 +106,14 @@ namespace StructureExplorer.Services
                     
                     break;
             }
+            
+            result.SearchResults.Add(new SearchResult
+            {
+                Name = info.Name,
+                Path = info.Path,
+                NodeType = info.NodeType,
+                ValueType = info.ValueType
+            });
 
             return info;
         }

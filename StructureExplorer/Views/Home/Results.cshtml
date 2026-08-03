@@ -1,4 +1,5 @@
-﻿@model JsonAnalysisResult
+﻿@using System.Text.Json
+@model JsonAnalysisResult
 
 <div class="container-fluid mt-5">
     <div class="row mb-4">
@@ -6,63 +7,88 @@
             <div class="card shadow-sm">
                 <div class="card-body text-center">
                     <h5>Objects</h5>
-                    
-                    <h2>
-                        @Model.ObjectCount
-                    </h2>
+                    <h2>@Model.ObjectCount</h2>
                 </div>
             </div>
         </div>
-        
+
         <div class="col-md-3">
             <div class="card shadow-sm">
                 <div class="card-body text-center">
                     <h5>Arrays</h5>
-                    
-                    <h2>
-                        @Model.ArrayCount
-                    </h2>
+                    <h2>@Model.ArrayCount</h2>
                 </div>
             </div>
         </div>
-        
+
         <div class="col-md-3">
             <div class="card shadow-sm">
                 <div class="card-body text-center">
                     <h5>Values</h5>
-                    
-                    <h2>
-                        @Model.PrimitiveCount
-                    </h2>
+                    <h2>@Model.PrimitiveCount</h2>
                 </div>
             </div>
         </div>
-        
+
         <div class="col-md-3">
             <div class="card shadow-sm">
                 <div class="card-body text-center">
                     <h5>Depth</h5>
-                    
-                    <h2>
-                        @Model.MaxDepth
-                    </h2>
+                    <h2>@Model.MaxDepth</h2>
                 </div>
             </div>
         </div>
     </div>
-    
-    <div class="card shadow">
-        <div class="card-header bg-dark text-white">
-            JSON Structure
+
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="card shadow-sm mb-3">
+                <div class="card-header">
+                    Search
+                </div>
+
+                <div class="card-body">
+                    <input id="searchBox" class="form-control" placeholder="Search Property Names..."/>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-3">
+                <div class="card-header">
+                    Search Results
+                </div>
+
+                <div class="card-body p-0">
+                    <ul id="searchResults" class="list-group list-group-flush"></ul>
+                </div>
+            </div>
         </div>
-        
-        <div class="card-body">
-            <ul class="json-tree">
-                @foreach (JsonNodeInfo node in Model.RootNodes)
-                {
-                    <partial name="_JsonNode" model="node" />
-                }
-            </ul>
+
+        <div class="col-lg-9">
+            <div class="card shadow">
+                <div class="card-header bg-dark text-white">
+                    JSON Structure
+                </div>
+
+                <div class="card-body">
+                    <ul class="json-tree">
+                        @foreach (JsonNodeInfo node in Model.RootNodes)
+                        {
+                            <partial name="_JsonNode" model="node"/>
+                        }
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        const searchIndex = @Html.Raw(JsonSerializer.Serialize(Model.SearchResults, new JsonSerializerOptions
+                            {
+                                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                            }));
+    </script>
+    
+    <script src="~/js/results.js"></script>
+}
