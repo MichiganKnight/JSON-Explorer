@@ -8,5 +8,7 @@
         public int ArrayCount { get; set; }
         public int PrimitiveCount { get; set; }
         public int MaxDepth { get; set; }
+        
+        public string GeneratedCSharpCode { get; set; } = string.Empty;
     }
 }

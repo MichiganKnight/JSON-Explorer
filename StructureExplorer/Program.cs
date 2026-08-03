@@ -8,6 +8,9 @@ builder.Services.AddHttpClient();
 builder.Services.AddScoped<IJsonAnalyzerService, JsonAnalyzerService>();
 builder.Services.AddScoped<IJsonFetcherService, JsonFetcherService>();
 
+builder.Services.AddScoped<CSharpNamingService>();
+builder.Services.AddScoped<CSharpClassGenerator>();
+
 WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.

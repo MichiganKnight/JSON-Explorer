@@ -10,11 +10,13 @@ namespace StructureExplorer.Controllers
     {
         private readonly IJsonAnalyzerService _analyzer;
         private readonly IJsonFetcherService _fetcher;
+        private readonly CSharpClassGenerator _generator;
 
-        public HomeController(IJsonAnalyzerService analyzer, IJsonFetcherService fetcher)
+        public HomeController(IJsonAnalyzerService analyzer, IJsonFetcherService fetcher, CSharpClassGenerator generator)
         {
             _analyzer = analyzer;
             _fetcher = fetcher;
+            _generator = generator;
         }
         
         [HttpGet]
@@ -48,11 +50,16 @@ namespace StructureExplorer.Controllers
 
                 JsonAnalysisResult result = _analyzer.Analyze(json);
 
+                if (result.Root != null)
+                {
+                    result.GeneratedCSharpCode = _generator.Generate(result.Root);    
+                }
+
                 return View("Results", result);
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("", $"Unabled to Process JSON: {ex.Message}");
+                ModelState.AddModelError("", $"Unable to Process JSON: {ex.Message}");
                 
                 return View(model);
             }

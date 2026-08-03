@@ -16,8 +16,8 @@
         public List<JsonNodeInfo> Children { get; set; } = new(0);
         
         public bool IsSample { get; set; }
-        public bool HasMoreChildren { get; set; }
         
-        public int RemainingChildren { get; set; }
+        public string SuggestedCSharpName { get; set; } = string.Empty;
+        public string SuggestedCSharpType { get; set; } = string.Empty;
     }
 }

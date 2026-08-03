@@ -49,3 +49,36 @@
     color: #495057;
     margin-left: 10px;
 }
+
+.json-path {
+    display: block;
+    font-family: monospace;
+    font-size: .8rem;
+    color: #6c757d;
+    margin-left: 45px;
+}
+
+.code-editor {
+    background: #1e1f22;
+    border-radius: 8px;
+    overflow-x: auto;
+    padding: 20px;
+}
+
+
+.code-editor pre {
+    margin: 0;
+}
+
+
+.code-editor code {
+    font-family:
+            "JetBrains Mono",
+            "Cascadia Code",
+            Consolas,
+            monospace;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}

@@ -5,6 +5,13 @@ namespace StructureExplorer.Services
 {
     public class JsonAnalyzerService : IJsonAnalyzerService
     {
+        private readonly CSharpNamingService _namingService;
+        
+        public JsonAnalyzerService(CSharpNamingService namingService)
+        {
+            _namingService = namingService;
+        }
+        
         public JsonAnalysisResult Analyze(string json)
         {
             JsonAnalysisResult result = new();
@@ -23,7 +30,7 @@ namespace StructureExplorer.Services
             return result;
         }
 
-        private static JsonNodeInfo Traverse(JsonNode node, JsonAnalysisResult result, string name, string path, int depth)
+        private JsonNodeInfo Traverse(JsonNode node, JsonAnalysisResult result, string name, string path, int depth)
         {
             result.MaxDepth = Math.Max(result.MaxDepth, depth);
 
@@ -39,7 +46,10 @@ namespace StructureExplorer.Services
                         Name = name,
                         Path = path,
                         NodeType = "Object",
-                        Depth = depth
+                        Depth = depth,
+                        
+                        SuggestedCSharpName = _namingService.ConvertToPropertyName(name),
+                        SuggestedCSharpType = _namingService.ConvertToPropertyName(name)
                     };
 
                     foreach (KeyValuePair<string, JsonNode?> property in obj)
@@ -58,7 +68,9 @@ namespace StructureExplorer.Services
                         Path = path,
                         NodeType = "Array",
                         Depth = depth,
-                        ChildCount = array.Count
+                        ChildCount = array.Count,
+                        
+                        SuggestedCSharpType = $"List<{_namingService.ConvertToPropertyName(_namingService.Singularize(name))}>"
                     };
 
                     if (array.Count > 0)
@@ -80,14 +92,26 @@ namespace StructureExplorer.Services
                 case JsonValue value:
                     result.PrimitiveCount++;
                     
+                    string type = value.GetValueKind().ToString();
+                    
                     info = new JsonNodeInfo
                     {
                         Name = name,
                         Path = path,
                         NodeType = "Value",
-                        ValueType = value.GetValueKind().ToString(),
+                        ValueType = type,
                         ValuePreview = value.ToString(),
-                        Depth = depth
+                        Depth = depth,
+                        
+                        SuggestedCSharpName = _namingService.ConvertToPropertyName(name),
+                        SuggestedCSharpType = type switch
+                        {
+                            "String" => "string",
+                            "Number" => "int",
+                            "True" => "bool",
+                            "False" => "bool",
+                            _ => "object"
+                        }
                     };
                     
                     break;
