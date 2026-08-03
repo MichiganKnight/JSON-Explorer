@@ -41,28 +41,6 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-3">
-            <div class="card shadow-sm mb-3">
-                <div class="card-header">
-                    Search
-                </div>
-
-                <div class="card-body">
-                    <input id="searchBox" class="form-control" placeholder="Search Property Names..."/>
-                </div>
-            </div>
-
-            <div class="card shadow-sm mb-3">
-                <div class="card-header">
-                    Search Results
-                </div>
-
-                <div class="card-body p-0">
-                    <ul id="searchResults" class="list-group list-group-flush"></ul>
-                </div>
-            </div>
-        </div>
-
         <div class="col-lg-9">
             <div class="card shadow">
                 <div class="card-header bg-dark text-white">
@@ -71,9 +49,9 @@
 
                 <div class="card-body">
                     <ul class="json-tree">
-                        @foreach (JsonNodeInfo node in Model.RootNodes)
+                        @foreach (JsonNodeInfo node in Model.Root?.Children!)
                         {
-                            <partial name="_JsonNode" model="node"/>
+                            <partial name="_JsonNode" model="node" />
                         }
                     </ul>
                 </div>
@@ -81,14 +59,3 @@
         </div>
     </div>
 </div>
-
-@section Scripts {
-    <script>
-        const searchIndex = @Html.Raw(JsonSerializer.Serialize(Model.SearchResults, new JsonSerializerOptions
-                            {
-                                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-                            }));
-    </script>
-    
-    <script src="~/js/results.js"></script>
-}

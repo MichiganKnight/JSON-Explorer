@@ -8,14 +8,14 @@
 <li class="json-node">
     @if (Model.Children.Any())
     {
-        <div>
+        <div class="node-line">
             <button class="btn btn-sm btn-link p-0 toggle-button" type="button" data-bs-toggle="collapse" data-bs-target="#@nodeId" aria-expanded="True">
-                <span>
-                    ▼
-                </span>
+                <span>▼</span>
             </button>
             
-            @NodeLabel()
+            <span class="node-name">@Model.Name</span>
+            
+            @NodeType()
         </div>
         
         <ul id="@nodeId" class="collapse show">
@@ -23,30 +23,53 @@
             {
                 <partial name="_JsonNode" model="child" />
             }
-            
-            @if (Model.HasMoreChildren)
-            {
-                <li class="text-muted fst-italic">
-                    ... @Model.RemainingChildren More Items
-                </li>
-            }
         </ul>
     }
     else
     {
-        @NodeLabel()
+        <div class="node-line">
+            <span class="empty-toggle"></span>
+            
+            <span class="node-name">@Model.Name</span>
+            
+            @NodeType()
+            
+            @if (!string.IsNullOrWhiteSpace(Model.ValuePreview))
+            {
+                <span class="value-preview">
+                    @Model.ValuePreview
+                </span>
+            }
+        </div>
     }
 </li>
 
-@functions {
-
-    private IHtmlContent NodeLabel()
+@functions
+{
+    private IHtmlContent NodeType()
     {
         return Model.NodeType switch
         {
-            "Object" => new HtmlString($"<strong>{Model.Name}</strong> <span class='badge bg-primary'>Object</span>"),
-            "Array" => new HtmlString($"<strong>{Model.Name}</strong> <span class='badge bg-success'>Array ({Model.ChildCount})</span>"),
-            _ => new HtmlString($"{Model.Name} <span class='badge bg-secondary'>{Model.ValueType}</span>"),
+            "Object" =>
+                new HtmlString(
+                    "<span class='node-type'>Object</span>"
+                ),
+
+
+            "Array" =>
+                new HtmlString(
+                    $"<span class='node-type'>Array [{Model.ChildCount}]</span>"
+                ),
+
+
+            "Value" =>
+                new HtmlString(
+                    $"<span class='node-type'>{Model.ValueType}</span>"
+                ),
+
+
+            _ =>
+                HtmlString.Empty
         };
     }
 }

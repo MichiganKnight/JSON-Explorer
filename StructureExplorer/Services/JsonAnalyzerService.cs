@@ -15,10 +15,10 @@ namespace StructureExplorer.Services
             {
                 return result;
             }
-
-            JsonNodeInfo rootNode = Traverse(root, result, "$", "$", 0);
             
-            result.RootNodes.Add(rootNode);
+            JsonNodeInfo rootNode = Traverse(root, result, "$", "$", -1);
+            
+            result.Root = rootNode;
             
             return result;
         }
@@ -61,23 +61,18 @@ namespace StructureExplorer.Services
                         ChildCount = array.Count
                     };
 
-                    int index = 0;
-
-                    const int maxArrayItems = 5;
-                    
-                    IEnumerable<JsonNode?> itemsToProcess = array.Take(maxArrayItems);
-
-                    foreach (JsonNode? item in itemsToProcess)
+                    if (array.Count > 0)
                     {
-                        info.Children.Add(Traverse(item!, result, $"[{index}]", $"{path}[{index}]", depth + 1));
-                        
-                        index++;
-                    }
+                        JsonNode? firstItem = array[0];
 
-                    if (array.Count > maxArrayItems)
-                    {
-                        info.HasMoreChildren = true;
-                        info.RemainingChildren = array.Count - maxArrayItems;
+                        if (firstItem != null)
+                        {
+                            JsonNodeInfo sample = Traverse(firstItem, result, "Item Structure", $"{path}[0]", depth + 1);
+                            
+                            sample.IsSample = true;
+                            
+                            info.Children.Add(sample);
+                        }
                     }
                     
                     break;
@@ -91,6 +86,7 @@ namespace StructureExplorer.Services
                         Path = path,
                         NodeType = "Value",
                         ValueType = value.GetValueKind().ToString(),
+                        ValuePreview = value.ToString(),
                         Depth = depth
                     };
                     
@@ -106,14 +102,6 @@ namespace StructureExplorer.Services
                     
                     break;
             }
-            
-            result.SearchResults.Add(new SearchResult
-            {
-                Name = info.Name,
-                Path = info.Path,
-                NodeType = info.NodeType,
-                ValueType = info.ValueType
-            });
 
             return info;
         }

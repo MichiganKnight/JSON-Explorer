@@ -1,35 +1,51 @@
-.json-tree {
-    list-style-type: none;
-    padding-left: 0;
+.json-tree,
+.json-tree ul {
+    list-style: none;
+    padding-left: 20px;
 }
 
-.json-tree ul {
-    list-style-type: none;
-    padding-left: 30px;
-}
 
 .json-node {
-    margin: 6px 0;
+    margin: 4px 0;
 }
 
-.json-node button {
-    width: 20px;
+
+.node-line {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
 }
 
-.json-node strong {
-    font-family: monospace;
-}
 
 .toggle-button {
-    text-decoration: none;
-    width: 25px;
+    width: 18px;
+    padding: 0;
+    border: none;
+    font-size: 12px;
 }
 
-.toggle-button span {
+
+.empty-toggle {
+    width: 18px;
     display: inline-block;
-    transition: transform 0.2s ease;
 }
 
-.toggle-button[aria-expanded="false"] span {
-    transform: rotate(-90deg);
+
+.node-name {
+    font-family: monospace;
+    font-weight: 600;
+}
+
+
+.node-type {
+    font-family: monospace;
+    color: #6c757d;
+    font-size: .9rem;
+}
+
+
+.value-preview {
+    font-family: monospace;
+    color: #495057;
+    margin-left: 10px;
 }
